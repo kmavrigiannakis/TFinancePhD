@@ -1,0 +1,196 @@
+
+\documentclass{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+
+\setcounter{MaxMatrixCols}{10}
+%TCIDATA{OutputFilter=LATEX.DLL}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Created=Wednesday, February 21, 2018 15:57:52}
+%TCIDATA{LastRevised=Thursday, February 22, 2018 22:35:03}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\input{tcilatex}
+\begin{document}
+
+
+\part{Topics In Finance: Assignment 2}
+
+\bigskip
+
+\section{Introduction}
+
+In this 2nd assignment, it was asked to estimate and plot the efficient
+frontier of a portfolio of 49 industries, using the monthly returns for the
+49 value weighted industry portfolio. Continually it was asked to calculate
+the optimal Sharpe Ratio and finally calculate the allocations to each
+industry portfolio which maximizes the Sharpe Ratio.
+
+\bigskip
+
+\section{Implementation}
+
+For the estimation of the efficient frontiers, I use two approaches. Firstly
+I estimate the efficient frontier, without allowing for short positions,
+i.e. negative weitghts on assets, and in the 2nd approach, I relax this
+constraint.
+
+\subsection{Constrained Efficient Frontier and Sharpe Ratio}
+
+Firstly, I estimate the efficient frontier for the 49 industries, without
+allowing for short positions. The efficient frontier has been derived using
+100 portfolios so as to better illustrate the line, because as the number of
+portfolios increases, it means that we take into consideration more expected
+return values, for the minimization of the risk (standard deviation). Of
+course, after a sufficient number of portfolios, the shape of the efficient
+frontier remains the same. As regards the results, the minimum variance
+portfolio(MVP), has st. deviation of $\sigma =3.9345$ with expected return
+of $E(r)~=0.99\%$ and the maximum return portfolio has st. deviation of \  $%
+\sigma =9.2276$, achieving an expected return\ $E(r)~=1.43\%$.Considering
+the optimal Sharpe ratio, this is the point of efficient frontier with
+expected return $E(r)~=1.11\%$ and risk $\sigma =4.1709$.
+
+In figure 1, the constrained efficient frontier is depicted. In figure 2,
+the optimal shape ratio is depicted, i.e. the point of the efficient
+frontier that maximizes the sharpe ratio. Finally, in figure 3, I
+demonstrate the allocations to each industry portfolio which maximizies the
+Sharpe Ratio.
+
+\bigskip \qquad $\overset{\FRAME{itbpF}{5.8825in}{4.4157in}{0in}{}{}{Figure}{%
+\special{language "Scientific Word";type "GRAPHIC";maintain-aspect-ratio
+TRUE;display "USEDEF";valid_file "T";width 5.8825in;height 4.4157in;depth
+0in;original-width 5.8228in;original-height 4.3647in;cropleft "0";croptop
+"1";cropright "1";cropbottom "0";tempfilename
+'P4KGEQ00.wmf';tempfile-properties "XPR";}}}{\
+Fig.1:The~efficientfrontier,using~100~portfolios,for~the~49~value~weighted~industry%
+}$\qquad \qquad \qquad \qquad \qquad \qquad
+
+\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad
+\qquad \qquad \qquad \qquad \qquad \qquad \qquad
+
+\bigskip \qquad $\overset{\FRAME{itbpF}{5.8825in}{4.4157in}{0in}{}{}{Figure}{%
+\special{language "Scientific Word";type "GRAPHIC";maintain-aspect-ratio
+TRUE;display "USEDEF";valid_file "T";width 5.8825in;height 4.4157in;depth
+0in;original-width 5.8228in;original-height 4.3647in;cropleft "0";croptop
+"1";cropright "1";cropbottom "0";tempfilename
+'P4KGGR01.wmf';tempfile-properties "XPR";}}}{Fig.2:The\
+optimal~SharpeRatio,for~the~constrained~portfolio}$\qquad \qquad \qquad
+\qquad \qquad \qquad
+
+\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad
+\qquad \qquad \qquad \qquad \qquad \qquad\ 
+
+\ \ \ \ \ $\FRAME{itbpF}{5.8894in}{3.8614in}{0in}{}{}{Figure}{\special%
+{language "Scientific Word";type "GRAPHIC";maintain-aspect-ratio
+TRUE;display "USEDEF";valid_file "T";width 5.8894in;height 3.8614in;depth
+0in;original-width 11.3057in;original-height 7.4028in;cropleft "0";croptop
+"1";cropright "1";cropbottom "0";tempfilename
+'P4KI2X02.bmp';tempfile-properties "XP";}}$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+\ \ \ \ \ \ \ 
+
+$\overset{%
+Fig.3:The~allocations~to~each~industry~portfolio~which~maximizes~the~sharperatio,~for~the~constrained~case%
+}{}$
+
+\subsection{Unconstrained Efficient Frontier and Sharpe Ratio}
+
+For the case in which I allow for short positions, the MVP portfolio
+generates an expected return of $E(r)=0.87\%$, with st. deviation $\sigma
+=3.1442$, i.e. in comparison with the constrained case I achieve lower risk
+with the cost of lower mean return. As regards the Maximum return portfolio,
+this yields an expected return of  $E(r)=8.51\%$, i.e. a return much higher
+than the constrained case, with the cost of higher risk $\sigma =63.5094$.
+Considering the optimal Sharpe ratio, this is the point of efficient
+frontier with expected return $E(r)=1.37$ and risk $\sigma =3.9384$. In
+comparison with the optimal Sharpe ratio in the constrained case, allowing
+for short positions leads in achieving higher expected return with lower
+risk. Finally, as regards the allocations to each industry portfolio which
+maximizies the Sharp
+
+$\bigskip $
+
+$\bigskip $
+
+$\FRAME{itbpF}{5.8804in}{4.4145in}{0in}{}{}{Figure}{\special{language
+"Scientific Word";type "GRAPHIC";maintain-aspect-ratio TRUE;display
+"USEDEF";valid_file "T";width 5.8804in;height 4.4145in;depth
+0in;original-width 5.8717in;original-height 4.4014in;cropleft "0";croptop
+"1";cropright "1";cropbottom "0";tempfilename
+'P4KJ3D06.wmf';tempfile-properties "XPR";}}$
+
+$\overset{%
+Fig.4:The~efficient~frontier,using~100~portfolios,for~the~49~value~weighted~industry,for~the~unconstrained~case.%
+}{}$
+
+$\FRAME{itbpF}{5.8804in}{4.4145in}{0in}{}{}{Figure}{\special{language
+"Scientific Word";type "GRAPHIC";maintain-aspect-ratio TRUE;display
+"USEDEF";valid_file "T";width 5.8804in;height 4.4145in;depth
+0in;original-width 5.8717in;original-height 4.4014in;cropleft "0";croptop
+"1";cropright "1";cropbottom "0";tempfilename
+'P4KIKA04.wmf';tempfile-properties "XPR";}}$
+
+$\overset{Fig.5:The\ optimal~Sharpe~Ratio,for~the~unconstrained~portfolio}{}$
+
+\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad
+\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad
+\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad\ 
+
+$\FRAME{itbpF}{6.3408in}{4.1295in}{0in}{}{}{Figure}{\special{language
+"Scientific Word";type "GRAPHIC";maintain-aspect-ratio TRUE;display
+"USEDEF";valid_file "T";width 6.3408in;height 4.1295in;depth
+0in;original-width 11.7364in;original-height 7.6333in;cropleft "0";croptop
+"1";cropright "1";cropbottom "0";tempfilename
+'P4KILD05.bmp';tempfile-properties "XPR";}}$
+
+$\overset{%
+Fig.6:The~allocations~to~each~industry~portfolio~which~maximizes~the~sharperatio,for~the~unconstrained~case.%
+}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }$
+
+\bigskip
+
+\section{Conclusions}
+
+In this assignment, I derived the efficient frontiers of a portfolio of 49
+industries, using the monthly returns for the 49 value weighted industry
+portfolio. Furthermore I estimated the optimal Sharpe Ratio and the
+allocations to each industry portfolio which maximizes the Sharpe Ratio. For
+these estimations, I used two methods, for constrained and unconstrained
+portfolios, allowing in the 2nd case for short positions. I concluded that
+allowing for short positions, I extend the lower risk and higher return
+values of the efficient frontier and that the optimal Sharpe ratio point has
+both higher return and lower risk than in the constrained case. Finally, as
+regards the allocations of industries which maximize the sharpe ratio, I can
+claim that in both cases, there are weights in all assets and that no asset
+possess more than 12\% of the portfolio, resulting in a high diversified
+portfolio.
+
+\end{document}
