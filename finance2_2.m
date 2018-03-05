@@ -1,37 +1,42 @@
+%Clear all variables and close all figures
 clear;
 clc;
 close all;
 
+%Load the necessary data
 load( 'finance2data.mat');
 data= AverageValueWeightedReturnsMonthly;
-
 load('IndustriesNames.mat');
 
+
+%
+%Main sector of assignment
+
+%Clear Unnecessary variable
 clear AverageValueWeightedReturnsMonthly ;
 
+%Estimation of average values and var covar matrix of returns of assets 
 Average = nanmean(data);
 VarCovar = cov(data,'partialrows');
 
+%Estimating Efficient Frontier with Default Constraints
+myPortfolio = Portfolio('AssetMean', Average, 'AssetCovar', VarCovar, 'LowerBound', 0, 'UpperBound',1, 'Budget', 1);
 
-% Estimating Efficient Frontier with Default Constraints
-p = Portfolio('AssetMean', Average, 'AssetCovar', VarCovar, 'LowerBound', 0, 'UpperBound',1, 'Budget', 1);
-
-% Estimating Efficient Frontier with No Constraints
-%p = Portfolio('AssetMean', Average, 'AssetCovar', VarCovar, 'LowerBound', -1, 'UpperBound',2, 'Budget', 1);
 
 NumPor=100;
-EffFrontier = estimateFrontier(p,NumPor);
+EffFrontier = estimateFrontier(myPortfolio,NumPor);
 
+%Plotting efficient frontier
 figure(1);
-plotFrontier(p, NumPor);
-[risks , returns] = plotFrontier(p, NumPor);
+plotFrontier(myPortfolio, NumPor);
+[risks , returns] = plotFrontier(myPortfolio, NumPor);
 
 figure(2);
-plotFrontier(p, NumPor);
+plotFrontier(myPortfolio, NumPor);
 %Estimating the optimum Sharpe Ratio which is tangled with efficient
 %frontier line
-weights = estimateMaxSharpeRatio(p);
-[risk, ret] = estimatePortMoments(p, weights);
+weights = estimateMaxSharpeRatio(myPortfolio);
+[risk, ret] = estimatePortMoments(myPortfolio, weights);
 hold on
 plot(risk,ret,'*r');
 
@@ -62,9 +67,6 @@ ShareRweightsPer(1,i) = num2str(round(SharpeRatioWeights(1,i)*100,2));
 end
 
 combinedtxt = strcat( cellstr(IndustriesNames),ShareRweightsPer );
-
-%pie(SharpeRatioWeights  ,pieOnesZeros, cellstr(combinedtxt));
-
 
 pie(SharpeRatioWeights  ,cellstr(combinedtxt));
 
