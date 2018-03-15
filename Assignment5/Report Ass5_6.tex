@@ -1,0 +1,171 @@
+
+\documentclass[11pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+\setcounter{MaxMatrixCols}{10}
+%TCIDATA{OutputFilter=LATEX.DLL}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Created=Thursday, March 15, 2018 13:02:50}
+%TCIDATA{LastRevised=Thursday, March 15, 2018 13:19:43}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Articles\SW\Mathematics Magazine Article">}
+%TCIDATA{CSTFile=MathMag.cst}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textit{#1.} }{}
+\setlength{\topmargin}{-.3in}
+\setlength{\textwidth}{5.5in}
+\setlength{\textheight}{8.6in}
+\setlength{\oddsidemargin}{0 in}
+\renewcommand{\baselinestretch}{1.2}
+\def\ds{\displaystyle}
+\pagestyle{myheadings}
+\parskip = 3mm
+\markright{ Author }  
+\thispagestyle{empty}
+
+\input{tcilatex}
+
+\begin{document}
+
+
+\begin{center}
+Assignment 5
+\end{center}
+
+\bigskip
+
+\section{Introduction}
+
+My task was to replicate for my momentum formation period criterion and
+portfolio returns, similar tables to the ones discussed during class. I'll
+proceed with the presentation of the three tables.
+
+\bigskip
+
+\section{Table 1}
+
+\begin{equation*}
+Table~1:~Summary~Statistics
+\end{equation*}%
+This table presents summary statistics for variables measuring momentum
+using the Fama French Data library sample for the months from July 1926
+through December 2017. Each month, the mean (Mean), standard deviation (SD),
+skewness (Skew), excess kurtosis (Kurt), minimum (Min), fifth percentile
+(5\%), 25th percentile (25\%), median (Median), 75th percentile (75\%), 95th
+percentile (95\%), and maximum (Max) values of the cross-sectional
+distribution of each variable are calculated. The table presents the
+time-series means for each cross-sectional value.The column labeled n
+indicates the average number of stocks per month, for which the given
+variable is available.
+
+\begin{description}
+\item $%
+\begin{tabular}{ccccccccccccc}
+\hline
+& $Mean$ & $SD$ & $Skew$ & $Kurt$ & $Min$ & $Min5\%$ & $25\%$ & $Median$ & $%
+75\%$ & $95\%$ & $Max$ & $n$ \\ \hline
+$Mom$ & $0.61$ & $6.46$ & $2.9$ & $49.0$ & $-76.04$ & $-10.2$ & $-4.22$ & $%
+-6.86$ & $2.88$ & $10$ & $18.63$ & $46$%
+\end{tabular}%
+$
+\end{description}
+
+\bigskip
+
+\bigskip
+
+\section{Table 2}
+
+\bigskip 
+\begin{equation*}
+Table~2:~Correlations
+\end{equation*}%
+This table presents the time-series averages of the monthy cross-sectional
+Pearson product--moment (Panel A) and Spearman rank correlations (Panel B)
+between momentum returns and of size and book to market (SMB).
+
+\begin{equation*}
+\begin{tabular}{l|l}
+\hline
+\multicolumn{2}{l}{Panel A: Pearson Cor.} \\ \hline
+& Size \\ \cline{2-2}
+Mom & $-0.24$ \\ \hline
+\multicolumn{2}{l}{Panel B: Spearman Cor.} \\ \hline
+& Size \\ \cline{2-2}
+Mom & $-0.26$%
+\end{tabular}%
+\end{equation*}
+
+\bigskip 
+
+\section{Table 3}
+
+\begin{equation*}
+Table~3:Univariate~Portfolio~Analysis 
+\end{equation*}
+
+This table presents the results of univariate portfolio analyses of the
+relation between each of the measures of momentum. Monthly portfolios are
+formed by sorting all stocks in the sample into portfolios using decile
+breakpoints calculated based on the given sort variable using all stocks of
+the sample. Panel A shows the average values of Momentum in each decile
+portfolio. Panel B (Panel C) shows the average equal-weighted
+(value-weighted ) one-month-ahead excess return (in percent per month) for
+each of the 10 decile portfolios. The table also shows the average return of
+the portfolio that is long the 10th decile portfolio and short the first
+decile portfolio (i.e my portfolio return using the momentum stratey), as
+well as the CAPM and FF alpha for this portfolio. Newey and West (1987)
+t-statistics, testing the null hypothesis that the average 10-1 portfolio
+return or alpha is equal to zero, are shown in parentheses.%
+\begin{equation*}
+\begin{tabular}{cccccccccccccc}
+\hline
+& \multicolumn{13}{c}{Panel A: Mom-Sorted Portfolio Characteristics} \\ 
+\hline
+Value & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ &  &  & 
+\\ \hline
+Mom & $0.90$ & $0.95$ & $0.97$ & $0.98$ & $1.00$ & $1.01$ & $1.02$ & $1.04$
+& $1.06$ & $1.13$ &  &  &  \\ \hline
+& \multicolumn{13}{c}{Panel B: Equal-Weighted Portfolio Returns} \\ \hline
+Variable & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $10-1
+$ & $CAPM~a$ & $FF~a$ \\ \hline
+Mom & $-0,20$ & $-0.09$ & $-0.03$ & $-0.01$ & $0.03$ & $0.05$ & $0.09$ & $%
+0.12$ & $0.19$ & $0.32$ & $0.52$ & $0.52$ & $0.52$ \\ 
+&  &  &  &  &  &  &  &  &  &  &  & $(25.87)$ & $(26.30)$ \\ \hline
+& \multicolumn{13}{c}{Panel C: Value-Weighted Portfolio Returns} \\ \hline
+Variable & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $10-1
+$ & $CAPM~a$ & $FF~a$ \\ \hline
+Mom & $-0.4$ & $-0.17$ & $-0.06$ & $0.01$ & $0.06$ & $0.13$ & $0.21$ & $0.27$
+& $0.4$ & $0.4$ & $0.8$ & $0.8$ & $0.81$ \\ 
+&  &  &  &  &  &  &  &  &  &  &  & $(27.37)$ & $(27.71)$%
+\end{tabular}%
+\end{equation*}
+
+\vspace*{0.2 in}
+
+\end{document}
