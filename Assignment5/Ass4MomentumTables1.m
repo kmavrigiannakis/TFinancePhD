@@ -2,6 +2,8 @@ clear;
 clc;
 close all;
 
+%% Initialization %%%
+%%Loading of appropriate Variables
 %Load monthly returns matrix
 load( 'monthlyReturns.mat' );
     %Remove data for 2018
@@ -174,11 +176,6 @@ realizedReturnValueW = realizedReturnEqualW;
 
 %New Returns for removing Null elements from size
 
-
-
-
-
-
 for i=2:size(momentumMatrix,1)
     %i=2;
       [sortedMatrixofReturns,indexMatrixE] = sort( momentumMatrix(i-1,:),2);
@@ -193,30 +190,12 @@ for i=2:size(momentumMatrix,1)
       numOfAssetsOfMonth =   numAssets - numOfNulls;  
       
       %Treating for Null for Value Weighted
-      %[sortedMatrixofReturns,indexMatrixSize] = sort(montlyReturnsNoNullSize,2);
-%       monthlyReturnsValueV = monthlyReturns( i+10, ~treatNan2(i,:) );
-%       sizeAssetsV = sizeAssets( i+10, ~treatNan2(i,:) );
-%       momentumMatrixV = momentumMatrix(i, ~treatNan2(i,:));
-      
-      
+      %Code for synchronizing momentum matrix, size matrix, and monthly returns
       monthlyReturnsValueV = monthlyReturns( i+10, ~treatNan2(i-1,:) );
       sizeAssetsV = sizeAssets( i+10, ~treatNan2(i-1,:) );
       momentumMatrixV = momentumMatrix(i-1, ~treatNan2(i-1,:));
-      
-
       [sortedMatrixofReturns,indexMatrix] = sort( momentumMatrixV,2);
-      
-%       numOfNulls = 0;
-%       temp= size(monthlyReturnsValueV,2);
-%       while( isnan(sortedMatrixofReturns(temp))==1)
-%           temp = temp -1 ;
-%           numOfNulls = numOfNulls+1;
-%       end
-%       numOfAssetsOfMonthV =   numAssets - numOfNulls;
-      
       numOfAssetsOfMonthV = size(monthlyReturnsValueV,2);
-      
-      
       %The starting position for matrix monthly returns is at 12
       %Because the criterion is Pt-1 / Pt-12
       %I begin from i=2 so I need to add 10
@@ -233,15 +212,7 @@ for i=2:size(momentumMatrix,1)
       newpositionE= round(0.9 *numOfAssetsOfMonth) +1 :  numOfAssetsOfMonth ;
       realizedReturnEqualW(10,i-1) =  sum( monthlyReturns( i+10, indexMatrixE( newpositionE ) ) ) ;
       realizedReturnValueW(10,i-1) =  10*(sum( monthlyReturnsValueV(indexMatrix( newpositionV ) ) .* sizeAssetsV( indexMatrix(newpositionV ) ) ) )/ sum(sizeAssetsV( indexMatrix(newpositionV )))   ;
-%       if( isnan(sum(monthlyReturns( i+10, indexMatrix( newposition ))) )==1 )
-%          i 
-%       end
-      
-%       if( isnan(sum(sizeAssets( i+10, indexMatrix(newpositionV ))))  ==1 )
-%          i
-%       end
-%       
-  
+
       %Essentially my return using the Momentum Technique
       realizedReturnValueW(11,i-1) =  realizedReturnValueW(10,i-1) - realizedReturnValueW(1,i-1);
       realizedReturnEqualW(11,i-1) =  realizedReturnEqualW(10,i-1) - realizedReturnEqualW(1,i-1);
