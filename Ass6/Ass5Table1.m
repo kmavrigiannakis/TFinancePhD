@@ -2,6 +2,15 @@ clear;
 clc;
 close all;
 
+%%%This is the Matlab File
+%For generating the first table
+%i.e. the returns for t+1, t+2, t+3 etc.
+%It is the same as in the previus assignment
+%with the addition of an appropriate
+%starting loop at the begin of all estimations
+%for estimating future returns
+%For NW st. errors I used the HAC function
+
 ValuesForTable = zeros( 12,10 );
 
 for monthsAhead = 10:22
@@ -87,90 +96,10 @@ averageValue = mean( nanmean(momentumMatrix,2) );
 minValue = min(min(momentumMatrix));
 %[sortedMatrixofReturns,indexMatrix] = sort( momentumMatrix,2);
 
-% %Initialization of Necessary Vectors
-% min5Value = zeros(1,numMonths);
-% min25Value = min5Value ;
-% medianValue = min5Value ;
-% min75Value = min5Value ;
-% min95Value = min5Value ;
-% maxValue = min5Value ;
-% numberOfAssets = min5Value ;
-% stDeviation =  min5Value ;
-% skewnessVector =  min5Value ;
-% kurtosisVector = min5Value ;
-% 
-% %Estimation of min values of Formating Period
-% 
-% for i = 1: size(momentumMatrix,1)
-%     %i=1;
-%       [sortedMatrixofReturns,indexMatrix] = sort( momentumMatrix(i, ~treatNan(i,:)),2);
-%       numOfAssetsOfMonth = size(sortedMatrixofReturns,2);
-%      
-%       min5Value(1,i) = prctile(sortedMatrixofReturns,5);
-%       min25Value(1,i)= prctile(sortedMatrixofReturns,25);
-%       medianValue(1,i) = median( sortedMatrixofReturns(1: round(0.25*numOfAssetsOfMonth) ));
-%       min75Value(1,i) = prctile(sortedMatrixofReturns,75);
-%       min95Value(1,i) =  prctile(sortedMatrixofReturns,95);
-%       maxValue(1,i) = max( sortedMatrixofReturns ); 
-%       numberOfAssets(1,i) = numOfAssetsOfMonth;
-%       stDeviation(1,i)= std( sortedMatrixofReturns );
-%       skewnessVector(1,i) = skewness(sortedMatrixofReturns);
-%       kurtosisVector(1,i) = kurtosis(sortedMatrixofReturns);
-%       
-% end
-% 
-% min5 = mean(min5Value)
-% min25 = mean(min25Value)
-% medianV = mean(medianValue) 
-% min75 = mean(min75Value)
-% min95 = mean( min95Value)
-% maxV = mean(maxValue)
-% numberOfA = sum(numberOfAssets)
-% stDeviationA = mean(stDeviation)
-% skewnessA = mean(skewnessVector)
-% kurtosisA = mean(kurtosisVector)
 
-
-%%%%%%%%% PART 3 %%%%%%%%%%%%%%%%%%%
-%%%Panel A
-%%I have already the returns of Momentum stored in matrix momentum
-% 
-% [sortedMatrixofReturns,indexMatrix] = sort( momentumMatrix,2);
-% 
-% %Initialization of Matrix for each percentile
-% 
-% mom =zeros(10,size(momentumMatrix,1));
-% 
-% %Estimation of mean Realized Return for each Percentile
-% for i=1:size(momentumMatrix,1)
-%     
-%       [sortedMatrixofReturns,indexMatrix] = sort( momentumMatrix(i, ~treatNan(i,:)),2);
-%       numOfAssetsOfMonth = size(sortedMatrixofReturns,2);
-%       mom(1,i)= mean( sortedMatrixofReturns(1: round(0.1*numOfAssetsOfMonth) ));
-%       mom(2,i)= mean( sortedMatrixofReturns(round(0.1*numOfAssetsOfMonth) +1 : round(0.2*numOfAssetsOfMonth) ));
-%       mom(3,i)= mean( sortedMatrixofReturns(round(0.2*numOfAssetsOfMonth)+1 : round(0.3*numOfAssetsOfMonth) ));
-%       mom(4,i)= mean( sortedMatrixofReturns(round(0.3*numOfAssetsOfMonth)+1: round(0.4*numOfAssetsOfMonth) ));
-%       mom(5,i)= mean( sortedMatrixofReturns(round(0.4*numOfAssetsOfMonth)+1: round(0.5*numOfAssetsOfMonth) ));
-%       mom(6,i)= mean( sortedMatrixofReturns(round(0.5*numOfAssetsOfMonth)+1: round(0.6*numOfAssetsOfMonth) ));
-%       mom(7,i)= mean( sortedMatrixofReturns(round(0.6*numOfAssetsOfMonth)+1: round(0.7*numOfAssetsOfMonth) ));
-%       mom(8,i)= mean( sortedMatrixofReturns(round(0.7*numOfAssetsOfMonth)+1: round(0.8*numOfAssetsOfMonth) ));
-%       mom(9,i)= mean( sortedMatrixofReturns(round(0.8*numOfAssetsOfMonth)+1: round(0.9*numOfAssetsOfMonth) ));
-%       mom(10,i)= mean( sortedMatrixofReturns(round(0.9*numOfAssetsOfMonth)+1: end ));
-%     
-% end
-% 
-% averageMOM = mean(mom,2);
-
-%Panel B
 
 realizedReturnEqualW = zeros(11,size(momentumMatrix,1));
 realizedReturnValueW = realizedReturnEqualW;
-
-%New Returns for removing Null elements from size
-
-
-
-
 
 
 for i=2:(size(momentumMatrix,1) - (monthsAhead-10) )
@@ -187,12 +116,7 @@ for i=2:(size(momentumMatrix,1) - (monthsAhead-10) )
       end
       numOfAssetsOfMonth =   numAssets - numOfNulls;  
       
-      %Treating for Null for Value Weighted
-      %[sortedMatrixofReturns,indexMatrixSize] = sort(montlyReturnsNoNullSize,2);
-%       monthlyReturnsValueV = monthlyReturns( i+10, ~treatNan2(i,:) );
-%       sizeAssetsV = sizeAssets( i+10, ~treatNan2(i,:) );
-%       momentumMatrixV = momentumMatrix(i, ~treatNan2(i,:));
-      
+
       
       monthlyReturnsValueV = monthlyReturns( i+monthsAhead, ~treatNan2(i-1,:) );
       sizeAssetsV = sizeAssets( i+monthsAhead, ~treatNan2(i-1,:) );
@@ -201,13 +125,6 @@ for i=2:(size(momentumMatrix,1) - (monthsAhead-10) )
 
       [sortedMatrixofReturns,indexMatrix] = sort( momentumMatrixV,2);
       
-%       numOfNulls = 0;
-%       temp= size(monthlyReturnsValueV,2);
-%       while( isnan(sortedMatrixofReturns(temp))==1)
-%           temp = temp -1 ;
-%           numOfNulls = numOfNulls+1;
-%       end
-%       numOfAssetsOfMonthV =   numAssets - numOfNulls;
       
       numOfAssetsOfMonthV = size(monthlyReturnsValueV,2);
       
