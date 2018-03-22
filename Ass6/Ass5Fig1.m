@@ -2,6 +2,11 @@ clear;
 clc;
 close all;
 
+
+%This is the matlab file for the diagram
+%Essentially, the new part starts from line 196
+
+
 %Load monthly returns matrix
 load( 'monthlyReturns.mat' );
     %Remove data for 2018
@@ -84,41 +89,13 @@ treatNan2 = isnan(momentumMatrix)| isnan(sizeAssets( 13:end ,:))  ;
 
 [sortedMatrixofReturns,indexMatrix] = sort( momentumMatrix,2);
 
-%Initialization of Matrix for each percentile
 
-mom =zeros(10,size(momentumMatrix,1));
-
-%Estimation of mean Realized Return for each Percentile
-for i=1:size(momentumMatrix,1)
-    
-      [sortedMatrixofReturns,indexMatrix] = sort( momentumMatrix(i, ~treatNan(i,:)),2);
-      numOfAssetsOfMonth = size(sortedMatrixofReturns,2);
-      mom(1,i)= mean( sortedMatrixofReturns(1: round(0.1*numOfAssetsOfMonth) ));
-      mom(2,i)= mean( sortedMatrixofReturns(round(0.1*numOfAssetsOfMonth) +1 : round(0.2*numOfAssetsOfMonth) ));
-      mom(3,i)= mean( sortedMatrixofReturns(round(0.2*numOfAssetsOfMonth)+1 : round(0.3*numOfAssetsOfMonth) ));
-      mom(4,i)= mean( sortedMatrixofReturns(round(0.3*numOfAssetsOfMonth)+1: round(0.4*numOfAssetsOfMonth) ));
-      mom(5,i)= mean( sortedMatrixofReturns(round(0.4*numOfAssetsOfMonth)+1: round(0.5*numOfAssetsOfMonth) ));
-      mom(6,i)= mean( sortedMatrixofReturns(round(0.5*numOfAssetsOfMonth)+1: round(0.6*numOfAssetsOfMonth) ));
-      mom(7,i)= mean( sortedMatrixofReturns(round(0.6*numOfAssetsOfMonth)+1: round(0.7*numOfAssetsOfMonth) ));
-      mom(8,i)= mean( sortedMatrixofReturns(round(0.7*numOfAssetsOfMonth)+1: round(0.8*numOfAssetsOfMonth) ));
-      mom(9,i)= mean( sortedMatrixofReturns(round(0.8*numOfAssetsOfMonth)+1: round(0.9*numOfAssetsOfMonth) ));
-      mom(10,i)= mean( sortedMatrixofReturns(round(0.9*numOfAssetsOfMonth)+1: end ));
-    
-end
-
-averageMOM = mean(mom,2);
-
-%Panel B
+%Estimation of realized Returns
 
 realizedReturnEqualW = zeros(11,size(momentumMatrix,1));
 realizedReturnValueW = realizedReturnEqualW;
 
 %New Returns for removing Null elements from size
-
-
-
-
-
 
 for i=2:size(momentumMatrix,1)
     %i=2;
@@ -174,15 +151,7 @@ for i=2:size(momentumMatrix,1)
       newpositionE= round(0.9 *numOfAssetsOfMonth) +1 :  numOfAssetsOfMonth ;
       realizedReturnEqualW(10,i-1) =  sum( monthlyReturns( i+10, indexMatrixE( newpositionE ) ) ) ;
       realizedReturnValueW(10,i-1) =  (sum( monthlyReturnsValueV(indexMatrix( newpositionV ) ) .* sizeAssetsV( indexMatrix(newpositionV ) ) ) )/ sum(sizeAssetsV( indexMatrix(newpositionV )))   ;
-%       if( isnan(sum(monthlyReturns( i+10, indexMatrix( newposition ))) )==1 )
-%          i 
-%       end
-      
-%       if( isnan(sum(sizeAssets( i+10, indexMatrix(newpositionV ))))  ==1 )
-%          i
-%       end
-%       
-  
+
       %Essentially my return using the Momentum Technique
       realizedReturnValueW(11,i-1) =  realizedReturnValueW(10,i-1) - realizedReturnValueW(1,i-1);
       realizedReturnEqualW(11,i-1) =  realizedReturnEqualW(10,i-1) - realizedReturnEqualW(1,i-1);
@@ -226,7 +195,7 @@ averageRealizedReturnW = nanmean(realizedReturnValueW,2);
  famaNwErrorsV = nwse(residualsV,famaIndependentVar );
  famaTstatisticsV = famaCoeffV./famaNwErrorsV;
  
- 
+%%Essentially this is the new Part
 %Plot Cumulative Excess Returns and Log Excess Returns
  
  %cumReturns = cumprod((realizedReturnValueW(11,:)/10 )+1)-1 ;
