@@ -1,5 +1,13 @@
 %function [ averageRealizedReturnE, realizedReturnEqualW] = sortCriterion2E( momentumMatrix, monthlyReturns, criterion1, criterion2, numPercentiles1, numPercentiles2  )
 
+%%This is the matlab file
+%For generating tables 11.5-11.6
+%Essentially I generated a general code
+%By choosing as criteria whatever variable you want
+%You will get a 6*6 matrix for returns
+%and the matrices for CAPM a and FF a and the NW st. errors
+%using the hac command
+%%This matlab file could easily be a separate function as you can see above
 
 %%%%%
 clear;
@@ -88,12 +96,7 @@ numPercentiles2=5;
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
+%%%%%%%%%%%%%%%%%Main Part %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 load('momentumMatrix.mat');
@@ -127,49 +130,28 @@ for i=2: min ( size(momentumMatrix,1), size(criterion1,1) )
       numberOfAssetsinCategory1 = floor(numOfAssetsOfMonth/numPercentiles1);
       numberOfAssetsinCategory2 = floor(numberOfAssetsinCategory1/numPercentiles2);
       temp2 = 0;
-      %for j = 1:numberOfAssetsinCategory1: (numOfAssetsOfMonth - numberOfAssetsinCategory1)
-      %for j=1:numPercentiles2-1
+     
       for j=1:numPercentiles2
-        %j=  numPercentiles2;
-          %temp1 = temp1+1;
+       
           newpositionE= temp1+1: temp1 + numberOfAssetsinCategory1;
           temp1=temp1 + numberOfAssetsinCategory1;
-          %newpositionE
-          %newpositionE= j: numberOfAssetsinCategory1+j;
-         % newpositionE
+         
              
            [sortedCriterion2E,indexMatrixE] = sort(criterion2(i-1, newpositionE),2);
-          % [sortedCriterion2E,indexMatrixE] = sort(criterion2(i-1, indexMatrixECriterion1),2);
+      
          
-          %for x=0:numberOfAssetsinCategory2:newpositionE
+          
            for x=1:numPercentiles2-1
    
-             %temp2=temp2 + numberOfAssetsinCategory2;
-%            criterion2( i-1, newpositionE(indexMatrixE) )
-%            monthlyReturns( i+10,
-          
-                %newpositionECriterion2 = x+1 : numberOfAssetsinCategory2+x;
+    
                 newpositionECriterion2 = temp2+1: temp2 + numberOfAssetsinCategory2;
                 temp2=temp2 + numberOfAssetsinCategory2;
-               % newpositionECriterion2
-                
-                %Estimation of Realized return for each subcategory
-                %realizedReturnEqualW(i-1, j+1,x+1) =  sum( monthlyReturns( i+10, indexMatrixE(newpositionE)));
-                %realizedReturnEqualW(i-1,temp1,temp2) =  sum( monthlyReturns( i+10,( indexMatrixECriterion1( newpositionE( indexMatrixE(newpositionECriterion2 ) ) )  ) ) );
-                
-                %realizedReturnEqualW(i-1,j,x) =  sum( monthlyReturns( i+10,( indexMatrixECriterion1( newpositionE( indexMatrixE(newpositionECriterion2 ) ) )  ) ) );
                 realizedReturnEqualW(i-1,x,j) =  sum( monthlyReturns( i+10,( indexMatrixECriterion1( newpositionE( indexMatrixE(newpositionECriterion2 ) ) )  ) ) );
           
            end
-           %temp2
-           %temp2+1
-           %length(newpositionE)
-           %temp2+1
-           %length(newpositionE)
+          
            newpositionECriterion2 = temp2+1 : length(newpositionE) ;
-          % newpositionECriterion2
-           % temp2=temp2 + length(newpositionE);
-           % temp2 = newpositionE(length(newpositionE));
+         
           
             temp2 = 0;
             
@@ -181,17 +163,7 @@ for i=2: min ( size(momentumMatrix,1), size(criterion1,1) )
       end
       %realizedReturnEqualW(i-1, numPercentiles1, numPercentiles2 ) =  sum( monthlyReturns( i+10,( indexMatrixECriterion1( newpositionE( indexMatrixE(newpositionECriterion2 ) ) )  ) ) );
       realizedReturnEqualW(i-1, numPercentiles2, numPercentiles1 ) =  sum( monthlyReturns( i+10,( indexMatrixECriterion1( newpositionE( indexMatrixE(newpositionECriterion2 ) ) )  ) ) );
-       
-      % realizedReturnEqualW(i-1, numPercentiles1, numPercentiles2 )
-%       if( isnan(sum(monthlyReturns( i+10, indexMatrix( newposition ))) )==1 )
-%          i 
-%       end
-      
-%       if( isnan(sum(sizeAssets( i+10, indexMatrix(newpositionV ))))  ==1 )
-%          i
-%       end
-%       
-  
+
       %Calculation of last Column
       realizedReturnEqualW(i-1,1:numPercentiles2,numPercentiles1+1) = mean(realizedReturnEqualW(i-1, 1:numPercentiles2,1:numPercentiles1) ,3 );
       
@@ -210,19 +182,12 @@ capmTstatisticsAlpha = capmA;
 famaA =capmA;
 famaTstatisticsAlpha = famaA;
 
-% if size(realizedReturnEqualW,1) < size(marketMinusRF,1)
-%         
-%         marketMinusRF = marketMinusRF(    )
-% end
-
 famaIndependentVar = [ marketMinusRF, SMB, HML  ];
 
 for i=1: numPercentiles2+1
     for j= 1:numPercentiles1+1
         
-%        [capmA(i,j),capmTstatisticsAlpha(i,j)] = capmRegstats(realizedReturnEqualW(11:end,i,j));
-%        [famaA(i,j),famaTstatisticsAlpha(i,j)] = famaRegstats(realizedReturnEqualW(11:end,i,j));
-%        
+ 
        [covarCapm,capmNwErrorsE, capmCoeffE ] =  hac( marketMinusRF,  realizedReturnEqualW(:,i,j) );
        capmTstatisticsAlpha(i,j) = capmCoeffE(1)/capmNwErrorsE(1);
        capmA(i,j) = capmCoeffE(1);
@@ -236,7 +201,7 @@ end
 
 
 %Write in Excel
-     forExcel = [ capmA(6,:) ; capmTstatisticsAlpha(6,:); famaA(6,:) ; famaTstatisticsAlpha(6,:)   ];
+forExcel = [ capmA(6,:) ; capmTstatisticsAlpha(6,:); famaA(6,:) ; famaTstatisticsAlpha(6,:)   ];
 xlswrite('Table11_4_5',forExcel );
 
 %Write tables to Excel
