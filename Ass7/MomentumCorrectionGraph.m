@@ -223,7 +223,7 @@ for i = 12: numMonths
      
       min5Value(1,i) = prctile(sortedMatrixofReturns,5);
       min25Value(1,i)= prctile(sortedMatrixofReturns,25);
-      medianValue(1,i) = median( sortedMatrixofReturns(1: round(0.25*numOfAssetsOfMonth) ));
+      medianValue(1,i) = median( sortedMatrixofReturns);
       min75Value(1,i) = prctile(sortedMatrixofReturns,75);
       min95Value(1,i) =  prctile(sortedMatrixofReturns,95);
       maxValue(1,i) = max( sortedMatrixofReturns ); 
@@ -234,16 +234,18 @@ for i = 12: numMonths
       
 end
 
-min5 = mean(min5Value)
-min25 = mean(min25Value)
-medianV = mean(medianValue) 
-min75 = mean(min75Value)
-min95 = mean( min95Value)
-maxV = mean(maxValue)
+averageValue = averageValue*100
+min5 = mean(min5Value)*100
+min25 = mean(min25Value)*100
+medianV = mean(medianValue)*100
+min75 = mean(min75Value)*100
+min95 = mean( min95Value)*100
+maxV = mean(maxValue)*100
 numberOfA = sum(numberOfAssets)
 stDeviationA = mean(stDeviation)
 skewnessA = mean(skewnessVector)
 kurtosisA = mean(kurtosisVector)
+
 
 
 %I have already the returns of Momentum stored in matrix momentum
